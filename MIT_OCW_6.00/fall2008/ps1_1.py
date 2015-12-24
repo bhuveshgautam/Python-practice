@@ -6,7 +6,7 @@ prime_ordinal = 1  # since 2 is the first prime but not generated, we already ha
 
 prime_ordinal_des = int(input('Enter the Xth prime number you want to find: '))  # input() gives a string, remember to convert to int!!
 
-test_val = 2  # [1]
+test_val = 2  # [1] Current number tested for primality
 
 
 while prime_ordinal < prime_ordinal_des:
