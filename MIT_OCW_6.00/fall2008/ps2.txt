@@ -1,0 +1,21 @@
+Problem 1:
+50 nuggets: 2x 6pack, 2x 9pack, 1x 20pack
+51 nuggets: 1x 6pack, 5x 9pack
+52 nuggets: 2x 6pack, 2x 20pack
+53 nuggets: 4x 6pack, 1x 9pack, 1x 20pack
+54 nuggets: 9x 6pack; 6x 9pack
+55 nuggets: 1x 6pack, 1x 9pack, 2x 20pack
+Observations:
+Only 9pack is odd, so odd # nuggets guarantees odd # of 9packs bought
+(Stating the obvious) More than one solution might exist
+
+
+Problem 2:
+We have x, x+1, x+2, x+3, x+4, x+5 total nugget sets. 
+Answer only requires looking at 6pack. We can make the 6 consecutive sets above.
+For [x...x+5] % 6, it is guaranteed to yield remainders (not necessarily in this order) of 0 (multiple of 6), 1, 2, 3, 4, and 5.
+Every possible number % 6 will have a possible remainder within the set [0, 5], from modular arithmetic, we can say that Z ≡ K (mod 6), where Z is some integer > x, and K is a value from the set [x...x+5].
+Therefore, any possible combination > x is possible. The 9pack and 20pack are convenient extras for the problem.
+Also note that as long as there are n-1 consecutive terms for a specified divisor n, any number > n is possible.
+
+tl;dr Numbers not divisible by 6 are compensated with all the possible remainders available in the [+a] term after x.
