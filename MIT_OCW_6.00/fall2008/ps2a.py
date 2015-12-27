@@ -11,9 +11,9 @@ last_unbuyable = start_nuggets
 
 # 4a + 9b + 20c = n
 # [1] set upper bound on how many max packs are possible in permutations. Need ceiling for max to work with range()
-a = math.ceil(current_nuggets / 6)
-b = math.ceil(current_nuggets / 9)
-c = math.ceil(current_nuggets / 20)
+a = math.ceil(current_nuggets / 6) + 1
+b = math.ceil(current_nuggets / 9) + 1
+c = math.ceil(current_nuggets / 20) + 1
 
 
 def check_nuggets():
@@ -24,14 +24,14 @@ def check_nuggets():
 	global last_unbuyable
 	global a, b, c
 
-	while(current_nuggets < 6):
-		last_unbuyable = current_nuggets  # looks less silly when pack quantities are variable
-		current_nuggets += 1
+	#while(current_nuggets < 6):
+	#	last_unbuyable = current_nuggets  # looks less silly when pack quantities are variable
+	#	current_nuggets += 1
 
 	while num_consecutive < 6:  # from problem 2, we know for a 6pack, we need 6 consecutive values to get every possible value after
-		a = math.ceil(current_nuggets / 6)  # Forgot to add this initially. Otherwise, a, b, c will stay 0 forever
-		b = math.ceil(current_nuggets / 9)
-		c = math.ceil(current_nuggets / 20)
+		a = math.ceil(current_nuggets / 6) + 1  # Forgot to add this initially. Otherwise, a, b, c will stay 0 forever
+		b = math.ceil(current_nuggets / 9) + 1
+		c = math.ceil(current_nuggets / 20) + 1
 		sum_nuggets()  # [2] http://stackoverflow.com/questions/189645/how-to-break-out-of-multiple-loops-in-python
 
 	print("Largest number of McNuggets that cannot be bought in exact quantity: {}".format(last_unbuyable))
@@ -48,10 +48,12 @@ def sum_nuggets():
 		for y in range(b):
 			for z in range(c):
 				if(x*6 + y*9 + z*20 == current_nuggets):
+					print("{} is bought with {} {} {}".format(current_nuggets, x, y, z))
 					current_nuggets += 1
 					num_consecutive += 1
 					return
 	# if this is reached, all combinations have been exhausted without a match
+	print("{} unbuyable".format(current_nuggets))
 	last_unbuyable = current_nuggets
 	current_nuggets += 1
 	num_consecutive = 0

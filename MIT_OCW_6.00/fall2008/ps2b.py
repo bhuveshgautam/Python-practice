@@ -32,6 +32,7 @@ for n in range(10):   # only search for solutions up to size 150
     for x in range(a):
         for y in range(b):
             for z in range(c):
+                print("{} {} {}".format(x, y, z))
                 if((x*packages[0] + y*packages[1] + z*packages[2]) == n):
                     print("{} {} {} = {}".format(x, y, z, x*packages[0] + y*packages[1] + z*packages[2]))
                     num_consecutive += 1
