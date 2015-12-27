@@ -18,12 +18,12 @@ packages = (6, 9, 20)   # variable that contains package sizes
 num_consecutive = 0
 
 
-for n in range(10):   # only search for solutions up to size 150
+for n in range(1, 200):   # only search for solutions up to size 150
     # complete code here to find largest size that cannot be bought
     # when done, your answer should be bound to bestSoFar
-    a = math.ceil(n / packages[0])
-    b = math.ceil(n / packages[1])
-    c = math.ceil(n / packages[2])
+    a = math.ceil(n / packages[0]) + 1
+    b = math.ceil(n / packages[1]) + 1
+    c = math.ceil(n / packages[2]) + 1
 
     print("n is {}, {} {} {}".format(n, a, b, c))
 
@@ -39,10 +39,8 @@ for n in range(10):   # only search for solutions up to size 150
                     buyable = True
                     break
             if buyable:
-                print("First")
                 break
         if buyable:
-            print("Second")
             break
     
     # code here executes if loops finished without a match OR if for break with a match

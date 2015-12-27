@@ -24,9 +24,8 @@ def check_nuggets():
 	global last_unbuyable
 	global a, b, c
 
-	#while(current_nuggets < 6):
-	#	last_unbuyable = current_nuggets  # looks less silly when pack quantities are variable
-	#	current_nuggets += 1
+	# originally had a check if # nuggets was less than smallest quantity. This caused a bug.
+	# redoing design so it won't mess up with this issue
 
 	while num_consecutive < 6:  # from problem 2, we know for a 6pack, we need 6 consecutive values to get every possible value after
 		a = math.ceil(current_nuggets / 6) + 1  # Forgot to add this initially. Otherwise, a, b, c will stay 0 forever
