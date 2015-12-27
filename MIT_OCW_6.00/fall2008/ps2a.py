@@ -44,9 +44,9 @@ def sum_nuggets():
 	global a, b, c
 
 	# [2] why use separate function?
-	for x in range(0, a):
-		for y in range(0, b):
-			for z in range(0, c):
+	for x in range(a):
+		for y in range(b):
+			for z in range(c):
 				if(x*6 + y*9 + z*20 == current_nuggets):
 					current_nuggets += 1
 					num_consecutive += 1
