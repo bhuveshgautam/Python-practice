@@ -17,10 +17,6 @@ c = math.ceil(current_nuggets / 20)
 
 
 def check_nuggets():
-	# check bounds
-		# sum of smallest buyable quantity must be smaller than tested value
-		# otherwise, increment until it is, then loop through the nugget buying
-		# kind of dumb if numbers are hard coded, but useful for next problem, when numbers are variable
 
 	global num_consecutive
 	global start_nuggets
@@ -29,13 +25,11 @@ def check_nuggets():
 	global a, b, c
 
 	while(current_nuggets < 6):
-		last_unbuyable = current_nuggets
+		last_unbuyable = current_nuggets  # looks less silly when pack quantities are variable
 		current_nuggets += 1
 
-	print("last_unbuyable {} current_nuggets {}".format(last_unbuyable, current_nuggets))
-
 	while num_consecutive < 6:  # from problem 2, we know for a 6pack, we need 6 consecutive values to get every possible value after
-		a = math.ceil(current_nuggets / 6)  # Forgot to add this initially. a, b, c will stay at global 0 forever otherwise
+		a = math.ceil(current_nuggets / 6)  # Forgot to add this initially. Otherwise, a, b, c will stay 0 forever
 		b = math.ceil(current_nuggets / 9)
 		c = math.ceil(current_nuggets / 20)
 		sum_nuggets()  # [2] http://stackoverflow.com/questions/189645/how-to-break-out-of-multiple-loops-in-python
@@ -54,25 +48,25 @@ def sum_nuggets():
 		for y in range(0, b):
 			for z in range(0, c):
 				if(x*6 + y*9 + z*20 == current_nuggets):
-				# if true, increment current_nuggets and num_consecutive, return
 					current_nuggets += 1
 					num_consecutive += 1
-					print("{} can be bought with {}x6 {}x9 {}x20".format(current_nuggets, x, y, z))
 					return
-	# if no match is found after exhausting all combinations, clear num_consecutive, update last_unbuyable, increment current_nuggets, return
-	print("{} cannot be bought".format(current_nuggets))
+	# if this is reached, all combinations have been exhausted without a match
 	last_unbuyable = current_nuggets
 	current_nuggets += 1
 	num_consecutive = 0
 	return
 
-
+# if I don't have this, the proram will have no errors, but doesn't seem to ever execute. Will examine this more later.
+# http://stackoverflow.com/questions/22492162/understanding-the-main-method-of-python
 if __name__ == '__main__':
 	check_nuggets()
 
 
 '''Notes
 [1]: Should I have the a b c division check inside check_bounds() or defined at the top? Global seems to give some advantages
+^This question has been indirectly answered. Passing the variables might be more convenient than the walls of global keyword.
+Will need to check how variables passed in functions work in Python.
 [2]: in the case that a match is found before each variable's maximum range is reached, break will only leave one loop when all loops need to stop.
 Return is best solution for this.
 
