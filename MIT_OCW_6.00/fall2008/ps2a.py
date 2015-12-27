@@ -13,6 +13,7 @@ a = math.ceil(current_nuggets / 6)
 b = math.ceil(current_nuggets / 9)
 c = math.ceil(current_nuggets / 20)
 
+#print("{} {} {} {}".format(num_consecutive, start_nuggets, current_nuggets, last_unbuyable))
 
 def check_nuggets():
 	# check bounds
@@ -23,6 +24,7 @@ def check_nuggets():
 		last_unbuyable = current_nuggets
 		current_nuggets += 1
 
+	print("last_unbuyable {} current_nuggets {}".format(last_unbuyable, current_nuggets))
 
 	while num_consecutive < 6:  # from problem 2, we know for a 6pack, we need 6 consecutive values to get every possible value after
 		sum_nuggets()  # [2] http://stackoverflow.com/questions/189645/how-to-break-out-of-multiple-loops-in-python
@@ -43,6 +45,10 @@ def sum_nuggets():
 	last_unbuyable = current_nuggets
 	num_consecutive = 0
 	return
+
+
+if __name__ == '__main__':
+	check_nuggets()
 
 
 '''Notes
