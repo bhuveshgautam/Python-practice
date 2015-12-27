@@ -12,8 +12,6 @@ packages = (6, 9, 20)   # variable that contains package sizes
 
 
 # if defining functions isn't allowed... need to find another way to implement this
-# http://stackoverflow.com/a/3357445 This one is really clever. Uses StopIteration exception. Clean.
-# http://stackoverflow.com/a/654002 for-else construction. Not perfect.
 
 num_consecutive = 0
 
@@ -25,16 +23,12 @@ for n in range(1, 200):   # only search for solutions up to size 150
     b = math.ceil(n / packages[1]) + 1
     c = math.ceil(n / packages[2]) + 1
 
-    print("n is {}, {} {} {}".format(n, a, b, c))
-
     buyable = False
 
     for x in range(a):
         for y in range(b):
             for z in range(c):
-                print("{} {} {}".format(x, y, z))
                 if((x*packages[0] + y*packages[1] + z*packages[2]) == n):
-                    print("{} {} {} = {}".format(x, y, z, x*packages[0] + y*packages[1] + z*packages[2]))
                     num_consecutive += 1
                     buyable = True
                     break
@@ -54,5 +48,8 @@ print("Given package sizes {}, {}, and {}, the largest number of McNuggets that 
 
 '''
 How does Python like their variables naming? camelCase? words_with_underscores?? User preference?? AHHH
-[1] Need to do some debugging to figure out how the control flow works with the break and continue there
+
+# http://stackoverflow.com/a/3357445 This one is really clever. Uses StopIteration exception. Clean.
+^This is beautiful except for more than 2 levels, pointless over variable.
+Also would've been preferable to define functions and use returns instead of looping.
 '''
