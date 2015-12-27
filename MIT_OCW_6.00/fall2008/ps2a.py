@@ -20,6 +20,12 @@ def check_nuggets():
 		# sum of smallest buyable quantity must be smaller than tested value
 		# otherwise, increment until it is, then loop through the nugget buying
 		# kind of dumb if numbers are hard coded, but useful for next problem, when numbers are variable
+
+	global num_consecutive
+	global start_nuggets
+	global current_nuggets
+	global last_unbuyable
+
 	while(current_nuggets < 6):
 		last_unbuyable = current_nuggets
 		current_nuggets += 1
@@ -32,6 +38,11 @@ def check_nuggets():
 	print("Largest number of McNuggets that cannot be bought in exact quantity: {}".format(last_unbuyable))
 
 def sum_nuggets():
+
+	global current_nuggets
+	global num_consecutive
+	global last_unbuyable
+
 	# [2] why use separate function?
 	for x in range(1, a):
 		for y in range(1, b):
