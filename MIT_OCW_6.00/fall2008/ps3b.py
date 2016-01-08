@@ -1,6 +1,6 @@
 from string import *
 
-def countSubStringMatch(target, key):
+def SubStringMatchExact(target, key):
 
     a = ()
     key_index = 0
@@ -28,4 +28,4 @@ if __name__ == '__main__':
     key12 = 'atgc'
     key13 = 'atgca'
 
-    countSubStringMatch(target1, key10)
+    countSubStringMatchExact(target1, key10)
