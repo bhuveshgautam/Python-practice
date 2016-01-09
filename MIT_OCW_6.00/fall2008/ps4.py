@@ -12,11 +12,10 @@ def nestEggFixed(salary, save, growthRate, years):
     """
     # TODO: Your code here.
     # using recursion would be great, but I can't see how to pass both F and counter without modifying the parameters without using another function
-    savings = salary * save * 0.01
-    F = [savings]
-    for x in range(0, years - 1):  # since one value was precalculated before the loop, must take last year off. Otherwise, a pop() would work too.
-        savings = F[x] * (1 + 0.01 * growthRate) + (salary * save * 0.01)
-        F.append(savings)
+    F = [0] * years
+    for x in range(0, years):  # since one value was precalculated before the loop, must take last year off. Otherwise, a pop() would work too.
+        savings = F[x - 1] * (1 + 0.01 * growthRate) + (salary * save * 0.01)
+        F[x] = savings
 
 
     return F
@@ -34,6 +33,22 @@ def testNestEggFixed():
     # [1000.0, 2150.0, 3472.5, 4993.375, 6742.3812499999995]
 
     # TODO: Add more test cases here.
+    savingsRecord = nestEggFixed(salary = 10000, save = 1, growthRate = 10, years = 5)  # multiline for each modified parameter like sample code is a pain
+    print(savingsRecord)
+
+    savingsRecord = nestEggFixed(salary = 10000, save = 1, growthRate = 20, years = 5)
+    print(savingsRecord)
+
+    savingsRecord = nestEggFixed(salary = 10000, save = 1, growthRate = 30, years = 5)
+    print(savingsRecord)
+
+    savingsRecord = nestEggFixed(salary = 10000, save = 1, growthRate = 40, years = 5)
+    print(savingsRecord)
+
+    # save gains are real
+    savingsRecord = nestEggFixed(salary = 10000, save = 2, growthRate = 5, years = 5)
+    print(savingsRecord)
+
 
 #
 # Problem 2
@@ -49,6 +64,13 @@ def nestEggVariable(salary, save, growthRates):
       account (integers between 0 and 100).
     - return: a list of your retirement account value at the end of each year.
     """
+
+    F = [0] * len(growthRates)  # I forgot this was allowed in Python. Python why are you so great?
+    for x in range(0, len(growthRates)):
+        savings = F[x-1] * (1 + 0.01 * growthRates[x]) + (salary * save * 0.01)  # [1] Why specifically adding a case for the first year isn't necessary
+        F[x] = savings
+
+    return F
 
 def testNestEggVariable():
     salary      = 10000
@@ -124,3 +146,7 @@ def testFindMaxExpenses():
 if __name__ == '__main__':
     testNestEggFixed()
 
+'''
+[1] Hilariously enough, since F[-1] is a valid index AND it contains 0, using F[x-1] for everything works.
+If F were initialized with any other number, this would not have worked.
+'''
