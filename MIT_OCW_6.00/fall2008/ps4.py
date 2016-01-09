@@ -97,6 +97,13 @@ def postRetirement(savings, growthRates, expenses):
     - return: a list of your retirement account value at the end of each year.
     """
     # TODO: Your code here.
+    F = [savings * (1 + 0.01 * growthRates[0]) - expenses]
+    for x in range(0, len(growthRates) - 1):
+        # since growthRates is off by 1 compared to index, need to +1 within the function to offset the range. 
+        # range must use len(growthRates)-1 or x has index error
+        rem_balance = F[x] * (1 + 0.01 * growthRates[x + 1]) - expenses
+        F.append(rem_balance)
+    return F
 
 def testPostRetirement():
     savings     = 100000
@@ -109,6 +116,19 @@ def testPostRetirement():
     # -4799.9999999999854, -34847.999999999985]
 
     # TODO: Add more test cases here.
+    growthRates = [5, 6, 7, 8, 9]
+
+    savingsRecord = postRetirement(savings = 100000, growthRates = growthRates, expenses = 15000)
+    print(savingsRecord)
+
+    growthRates = [9, 8, 7, 6, 5]
+    savingsRecord = postRetirement(savings = 100000, growthRates = growthRates, expenses = 15000)
+    print(savingsRecord)
+
+    growthRates = [5, 5, 5, 5, 5]
+    savingsRecord = postRetirement(savings = 100000, growthRates = growthRates, expenses = 15000)
+    print(savingsRecord)
+
 
 #
 # Problem 4
@@ -144,7 +164,7 @@ def testFindMaxExpenses():
     # TODO: Add more test cases here.
 
 if __name__ == '__main__':
-    testNestEggFixed()
+    testPostRetirement()
 
 '''
 [1] Hilariously enough, since F[-1] is a valid index AND it contains 0, using F[x-1] for everything works.
