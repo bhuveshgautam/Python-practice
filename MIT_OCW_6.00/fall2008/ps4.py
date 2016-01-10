@@ -147,7 +147,31 @@ def findMaxExpenses(salary, save, preRetireGrowthRates, postRetireGrowthRates,
     - epsilon: an upper bound on the absolute value of the amount remaining in
       the investment fund at the end of retirement.
     """
-    # TODO: Your code here.
+    # the expenses only apply AFTER retirement, none while still working
+    working_cashflow = nestEggVariable(salary, save, preRetireGrowthRates)
+    retire_start_bal = working_cashflow[-1]
+    low, high = 0, retire_start_bal
+    est_expense = (low + high)/2  # start estimate right at the middle
+    retire_cashflow = postRetirement(retire_start_bal, postRetireGrowthRates, est_expense)
+    final_bal = retire_cashflow[-1]
+    print(retire_cashflow)
+    print("Estimated expense:", est_expense)
+    while abs(final_bal) > epsilon:
+        if final_bal > 0:  # positive balance remaining, make expenses higher
+            low = est_expense
+        else:  # negative balance, make expenses lower
+            high = est_expense
+        est_expense = (low + high)/2
+        retire_cashflow = postRetirement(retire_start_bal, postRetireGrowthRates, est_expense)
+        final_bal = retire_cashflow[-1]
+        print(retire_cashflow)
+        print("Estimated expense:", est_expense)
+
+    return est_expense
+
+
+
+
 
 def testFindMaxExpenses():
     salary                = 10000
@@ -160,11 +184,22 @@ def testFindMaxExpenses():
     print(expenses)
     # Output should have a value close to:
     # 1229.95548986
+    preRetireGrowthRates  = [5, 4, 3, 2, 1]
+    postRetireGrowthRates = [0, 0, 0, 0, 0]
+    expenses = findMaxExpenses(salary = 10000, save = 10, preRetireGrowthRates = preRetireGrowthRates, postRetireGrowthRates = postRetireGrowthRates, epsilon = epsilon)
 
-    # TODO: Add more test cases here.
+    preRetireGrowthRates  = [3, 4, 5, 0, 3]
+    postRetireGrowthRates = [10, 5, 0, 5, 1]
+    expenses = findMaxExpenses(salary = 20, save = 10, preRetireGrowthRates = preRetireGrowthRates, postRetireGrowthRates = postRetireGrowthRates, epsilon = epsilon)
+    
+    preRetireGrowthRates  = [10, 11, 12, 13, 14]
+    postRetireGrowthRates = [5, 5, 5, 5, 5]
+    expenses = findMaxExpenses(salary = 10000, save = 5, preRetireGrowthRates = preRetireGrowthRates, postRetireGrowthRates = postRetireGrowthRates, epsilon = epsilon)
+    
+
 
 if __name__ == '__main__':
-    testPostRetirement()
+    testFindMaxExpenses()
 
 '''
 [1] Hilariously enough, since F[-1] is a valid index AND it contains 0, using F[x-1] for everything works.
