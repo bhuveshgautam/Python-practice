@@ -154,8 +154,8 @@ def findMaxExpenses(salary, save, preRetireGrowthRates, postRetireGrowthRates,
     est_expense = (low + high)/2  # start estimate right at the middle
     retire_cashflow = postRetirement(retire_start_bal, postRetireGrowthRates, est_expense)
     final_bal = retire_cashflow[-1]
-    print(retire_cashflow)
-    print("Estimated expense:", est_expense)
+    #print(retire_cashflow)
+    #print("Estimated expense:", est_expense)
     while abs(final_bal) > epsilon:
         if final_bal > 0:  # positive balance remaining, make expenses higher
             low = est_expense
@@ -164,8 +164,8 @@ def findMaxExpenses(salary, save, preRetireGrowthRates, postRetireGrowthRates,
         est_expense = (low + high)/2
         retire_cashflow = postRetirement(retire_start_bal, postRetireGrowthRates, est_expense)
         final_bal = retire_cashflow[-1]
-        print(retire_cashflow)
-        print("Estimated expense:", est_expense)
+        #print(retire_cashflow)
+        #print("Estimated expense:", est_expense)
 
     return est_expense
 
@@ -187,14 +187,18 @@ def testFindMaxExpenses():
     preRetireGrowthRates  = [5, 4, 3, 2, 1]
     postRetireGrowthRates = [0, 0, 0, 0, 0]
     expenses = findMaxExpenses(salary = 10000, save = 10, preRetireGrowthRates = preRetireGrowthRates, postRetireGrowthRates = postRetireGrowthRates, epsilon = epsilon)
-
-    preRetireGrowthRates  = [3, 4, 5, 0, 3]
-    postRetireGrowthRates = [10, 5, 0, 5, 1]
-    expenses = findMaxExpenses(salary = 20, save = 10, preRetireGrowthRates = preRetireGrowthRates, postRetireGrowthRates = postRetireGrowthRates, epsilon = epsilon)
+    print(expenses)
     
-    preRetireGrowthRates  = [10, 11, 12, 13, 14]
-    postRetireGrowthRates = [5, 5, 5, 5, 5]
+    preRetireGrowthRates  = [5, 4, 3, 2, 1]
+    postRetireGrowthRates = [10, 10, 10, 10, 10]
+    expenses = findMaxExpenses(salary = 10000, save = 10, preRetireGrowthRates = preRetireGrowthRates, postRetireGrowthRates = postRetireGrowthRates, epsilon = epsilon)
+    print(expenses)
+    
+    
+    preRetireGrowthRates  = [5, 4, 3, 2, 1]
+    postRetireGrowthRates = [10, 10, 10, 10, 10]
     expenses = findMaxExpenses(salary = 10000, save = 5, preRetireGrowthRates = preRetireGrowthRates, postRetireGrowthRates = postRetireGrowthRates, epsilon = epsilon)
+    print(expenses)
     
 
 
