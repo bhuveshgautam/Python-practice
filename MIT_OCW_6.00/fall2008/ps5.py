@@ -119,14 +119,14 @@ def deal_hand(n):
     returns: dictionary (string -> int)
     """
     hand={}
-    num_vowels = int(n / 3)
+    num_vowels = int(n / 3)  # int() will truncate, not round!
     
     for i in range(num_vowels):
-        x = VOWELS[random.randrange(0,len(VOWELS))]
-        hand[x] = hand.get(x, 0) + 1
+        x = VOWELS[random.randrange(0,len(VOWELS))]  # randomly selects a vowel from the defined VOWEL string at top
+        hand[x] = hand.get(x, 0) + 1  # adding new k-v pairs same as for modifying values. If x isn't already in the hand (hence, default 0 value), add it and increment counter to 1
         
     for i in range(num_vowels, n):    
-        x = CONSONANTS[random.randrange(0,len(CONSONANTS))]
+        x = CONSONANTS[random.randrange(0,len(CONSONANTS))]  # randomly selects a consanant from the defined CONSANANT string at top
         hand[x] = hand.get(x, 0) + 1
         
     return hand
@@ -151,6 +151,13 @@ def update_hand(hand, word):
     returns: dictionary (string -> int)
     """
     # TO DO ...
+    
+    new_hand = hand
+
+    for letter in word:
+        new_hand[letter] -= 1
+
+    return new_hand
 
 #
 # Problem #3: Test word validity
@@ -247,3 +254,9 @@ if __name__ == '__main__':
     word_list = load_words()
     play_game(word_list)
 
+
+
+
+'''
+
+'''
