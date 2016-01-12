@@ -174,6 +174,16 @@ def is_valid_word(word, hand, word_list):
     """
     # TO DO ...
 
+    # more important to make sure word is real before checking if word is selectable from hand
+    if word in word_list:
+        for letter in word:
+            if word.count(letter) > hand.get(letter, 0):  # if more letters are used than available in hand, automatically invalid
+                return False
+
+        return True  # will arrive here only if word is valid
+    else:
+        return False
+
 #
 # Problem #4: Playing a hand
 #

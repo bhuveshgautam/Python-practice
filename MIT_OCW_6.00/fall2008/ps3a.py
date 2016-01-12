@@ -8,7 +8,7 @@ def countSubStringMatch(target, key):
     key_index = target.find(key)
 
     while key_index != -1:
-        key_index = target.find(key, key_index + 1)  # [1] Why specifically +1 and not +len(key)
+        key_index = target.find(key, key_index + len(key))  # [1] Originaly +1 and not len(key). But "correct" answer is no overlaps.
         key_instances += 1
 
     print("""The string "{}" appears in "{}" {} times. """.format(key, target, key_instances))
@@ -26,7 +26,7 @@ def countSubStringMatchRecursive(target, key):
         return 0
     else:  # match found, increment
         key_instances = 1  # add one for this recursion frame
-        key_instances += countSubStringMatchRecursive(target[key_index + 1:], key)
+        key_instances += countSubStringMatchRecursive(target[key_index + len(key):], key)
         print("""The string "{}" appears in "{}" {} times. """.format(key, target, key_instances))
         return key_instances
 
@@ -40,5 +40,6 @@ if __name__ == '__main__':
 '''
 [1] In the case where the key string has repeats of itself, e.g. 'hihi' and target is 'hihihi',
 adding len(key) will skip the second repetition. 'hihi' appears in 'hihihi' 2 times, not 1: [:5] and [5:]
+UPDATE: Using Python's built in count function for 'hihihi'.count('hihi') returns 1. So the correct implementation is to not accept overlaps.
 
 '''
