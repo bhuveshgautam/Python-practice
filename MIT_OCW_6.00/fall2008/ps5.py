@@ -100,9 +100,8 @@ def display_hand(hand):
     """
     for letter in hand.keys():
         for j in range(hand[letter]):
-            print(letter,)              # print all on the same line
-    print                              # print an empty line
-
+            print(letter, end = " ")              # print all on the same line
+    print                              # print a new line
 #
 # Make sure you understand how this function works and what it does!
 #
@@ -216,7 +215,9 @@ def play_hand(hand, word_list):
       word_list: list of lowercase strings
     """
     # TO DO ...
-    print("play_hand not implemented.") # replace this with your code...
+    #print("play_hand not implemented.") # replace this with your code...
+    print("Current hand contains: ")
+    display_hand(hand)
 
 #
 # Problem #5: Playing a game
@@ -262,8 +263,8 @@ def play_game(word_list):
 #
 if __name__ == '__main__':
     word_list = load_words()
-    play_game(word_list)
-
+    hand = deal_hand(7)
+    display_hand(hand)
 
 
 
