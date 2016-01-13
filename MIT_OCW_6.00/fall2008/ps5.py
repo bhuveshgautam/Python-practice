@@ -36,6 +36,7 @@ def load_words():
     for line in inFile:
         wordlist.append(line.strip().lower())
     print ("  ", len(wordlist), "words loaded.")
+    print()
     return wordlist
 
 def get_frequency_dict(sequence):
@@ -214,10 +215,34 @@ def play_hand(hand, word_list):
       hand: dictionary (string -> int)
       word_list: list of lowercase strings
     """
-    # TO DO ...
-    #print("play_hand not implemented.") # replace this with your code...
-    print("Current hand contains: ")
-    display_hand(hand)
+    user_word = ""
+    user_score = 0
+    total_score = 0
+    while user_word != ".":
+
+        print("Current hand contains: ")
+        display_hand(hand)
+        user_word = input("Enter word, or a . to indicate that you are finished: ")
+        
+        # check if user ends game first. Otherwise, odd execution statements will follow
+        if user_word == ".":
+            print("\nTotal score:", total_score)
+            break
+        
+        # entering word
+        if is_valid_word(user_word, hand, word_list):
+            user_score = get_word_score(user_word, len(hand))
+            total_score += user_score
+            update_hand(hand, user_word)
+            print("{} earned {} points. Total: {} points\n".format(user_word, user_score, total_score))
+        else:  # word is invalid
+            print("Invalid word, please try again.")
+            print()
+
+        # check if hand is done
+        if not hand:  # empty dictionaries return bool False if empty
+            print("\nHand done, total score:", total_score)
+            break
 
 #
 # Problem #5: Playing a game
@@ -264,7 +289,7 @@ def play_game(word_list):
 if __name__ == '__main__':
     word_list = load_words()
     hand = deal_hand(7)
-    display_hand(hand)
+    play_hand(hand, word_list)
 
 
 

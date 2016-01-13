@@ -189,6 +189,9 @@ def test_is_valid_word(word_list):
         print("SUCCESS: test_is_valid_word()")
 
 
+def test_play_hand():
+
+
 word_list = load_words()
 print("----------------------------------------------------------------------")
 print("Testing get_word_score...")
