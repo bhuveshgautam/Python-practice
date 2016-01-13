@@ -156,6 +156,8 @@ def update_hand(hand, word):
 
     for letter in word:
         new_hand[letter] -= 1
+        if new_hand[letter] == 0:
+            del new_hand[letter]
 
     return new_hand
 
@@ -236,12 +238,10 @@ def play_hand(hand, word_list):
             update_hand(hand, user_word)
             print("{} earned {} points. Total: {} points\n".format(user_word, user_score, total_score))
         else:  # word is invalid
-            print("Invalid word, please try again.")
-            print()
-
+            print("Invalid word, please try again.\n")
         # check if hand is done
         if not hand:  # empty dictionaries return bool False if empty
-            print("\nHand done, total score:", total_score)
+            print("Hand done, total score:", total_score)
             break
 
 #

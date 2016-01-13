@@ -189,7 +189,9 @@ def test_is_valid_word(word_list):
         print("SUCCESS: test_is_valid_word()")
 
 
-def test_play_hand():
+def test_play_hand(word_list):
+    hand = {'l':1, 'e':2, 't':2, 'r':1, 's':1}
+    play_hand(hand, word_list)
 
 
 word_list = load_words()
@@ -206,4 +208,6 @@ print("----------------------------------------------------------------------")
 print("Testing is_valid_word...")
 test_is_valid_word(word_list)
 print("----------------------------------------------------------------------")
+print("Testing play_hand...")
+test_play_hand(word_list)
 print("All done!")
