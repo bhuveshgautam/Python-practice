@@ -80,7 +80,7 @@ def get_word_score(word, n):
     score = 0
     for letter in word:
         score += SCRABBLE_LETTER_VALUES[letter]
-    if len(word) == HAND_SIZE:
+    if len(word) == n:
         score += 50
     return score
 
@@ -233,7 +233,7 @@ def play_hand(hand, word_list):
         
         # entering word
         if is_valid_word(user_word, hand, word_list):
-            user_score = get_word_score(user_word, len(hand))
+            user_score = get_word_score(user_word, HAND_SIZE)
             total_score += user_score
             update_hand(hand, user_word)
             print("{} earned {} points. Total: {} points\n".format(user_word, user_score, total_score))
