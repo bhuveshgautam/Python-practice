@@ -20,14 +20,14 @@ def load_words():
     Depending on the size of the word list, this function may
     take a while to finish.
     """
-    print "Loading word list from file..."
+    print("Loading word list from file...")
     # inFile: file
-    inFile = open(WORDLIST_FILENAME, 'r', 0)
+    inFile = open(WORDLIST_FILENAME, 'r')
     # wordlist: list of strings
     wordlist = []
     for line in inFile:
         wordlist.append(line.strip().lower())
-    print "  ", len(wordlist), "words loaded."
+    print("  ", len(wordlist), "words loaded.")
     return wordlist
 
 def get_frequency_dict(sequence):
@@ -56,26 +56,69 @@ wordlist = load_words()
 
 # TO DO: your code begins here!
 
-def play_ghost():
+def check_lose_conditions(current_fragment, wordlist):
+
+    # True if lose condition is met. False if lose condition not yet met
+
+    if len(current_fragment) > 3:
+        for word in wordlist:
+            if current_fragment == word:  # word is formed, lose
+                return "is a word"
+            if current_fragment == word[:len(current_fragment)]:
+                # no exact word match, check if word can form from fragment. It it can, continue game
+                return "continue"
+
+        #arrives here if word cannot be formed by fragment, lose
+        return "no word begins with"
+
+    else:  # make sure fragment of 3 characters or fewer can still produce word
+        for word in wordlist:
+            if current_fragment == word[:len(current_fragment)]:
+                return "continue"  # can stop at first word that can still be matched
+
+        # arrives here if no words can form with fragment, lose
+        return "no word begins with"
+
+
+
+
+def play_ghost(wordlist):
     print("Welcome to Ghost!")
 
-    current_player = "Player 1"
+    current_player =  0  # 0 is player 1, 2 is player 2. Assigned so to make switching easier
     player1_score, player2_score = 0, 0
     player_input = ""
     current_fragment = ""
     
     while True:
-        print(current_player, "goes first.")
-        print("Current word fragment:", current_fragment.lower())
+        print("\nPlayer {}'s turn.".format(current_player + 1))
+        print("Current word fragment:", current_fragment)
         
         # input word
-        player_input = input(current_player, "says letter: ")
-        if player_input in string.ascii_letters:
+        player_input = input("Player " + str(current_player + 1) + " says letter: ")
+        if player_input in string.ascii_letters and player_input != "":
             # add input to fragment
-            # check if word can be formed with fragment. If not, lose and break
-            # check if fragment is a word > 3 characters. If it is, lose and break
+            current_fragment += player_input.lower()
+            result = check_lose_conditions(current_fragment, wordlist)
 
-            # switch current player
+            # execute below for losing
+            if result == "is a word":
+                print("Player {} loses because {} {}".format(current_player + 1, current_fragment, result))
+                print("Player", (current_player ^ 1) + 1, "wins!")
+                break
+            elif result == "no word begins with":
+                print("Player {} loses because {} {}".format(current_player + 1, result, current_fragment))
+                print("Player", (current_player ^ 1) + 1, "wins!")
+                break
+            
+            # execute below for continuing
+            current_player = current_player ^ 1 # bitwise XOR. 0 becomes 1, 1 becomes 0. Functions that use current_player will add 1 separately
+
         else:
             print(player_input, "is not a valid input. Please try again.")
 
+
+
+
+
+play_ghost(wordlist)
