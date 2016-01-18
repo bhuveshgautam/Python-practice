@@ -4,8 +4,16 @@
 # Time: 
 #
 
+"""
+Author: Chang Li
+Variables given: VOWELS, CONSONANTS, HAND_SIZE, SCRABBLE_LETTER_VALUES
+Function signatures given: get_word_score, display_hand, deal_hand, update_hand, is_valid_word, play_hand
+Functions given: load_words, get_frequency_dict, play_game
+"""
+
 import random
 import string
+import pydoc
 
 VOWELS = 'aeiou'
 CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
@@ -289,6 +297,6 @@ if __name__ == '__main__':
 
 
 
-'''
+"""
 
-'''
+"""

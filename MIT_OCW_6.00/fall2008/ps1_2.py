@@ -1,6 +1,11 @@
-'''Product of Primes'''
+"""Product of Primes
+Author: Chang Li
+All code original.
+"""
+
 
 import math  # http://stackoverflow.com/questions/9439480/from-import-vs-import
+import pydoc
 
 prime_ordinal = 1  # since 2 is the first prime but not generated, we already have a prime to start with
 
@@ -31,8 +36,8 @@ print('The sum of logs of the primes is {}'.format(log_prime))
 print('The ratio of the sum of logs to n is {}'.format(log_prime/test_val))
 
 # NOTES
-'''
+"""
 [1]:
 Originally, test_val starts at 3 and was incremented at the end of the loop. The problem with this is that at the print statement, test_val would be +OBO.
 So instead of doing test_val-1 for the print statement at the end, just rearrange starting test_val to 2, and increment at the beginning of the loop. Saves an operation.
-'''
+"""

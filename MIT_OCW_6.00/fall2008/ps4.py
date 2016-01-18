@@ -1,3 +1,10 @@
+"""
+Author: Chang Li
+Function signatures given: nestEggFixed, nestEggVariable, postRetirement, findMaxExpenses
+All test functions given; additional tests written
+"""
+
+import pydoc
 
 def nestEggFixed(salary, save, growthRate, years):
     """
@@ -205,7 +212,7 @@ def testFindMaxExpenses():
 if __name__ == '__main__':
     testFindMaxExpenses()
 
-'''
+"""
 [1] Hilariously enough, since F[-1] is a valid index AND it contains 0, using F[x-1] for everything works.
 If F were initialized with any other number, this would not have worked.
-'''
+"""

@@ -1,10 +1,10 @@
-# Problem Set 5: Ghost
-# Name: 
-# Collaborators: 
-# Time: 
-#
+"""
+Author: Chang Li
+Functions given: load_words, get_frequency_dict
+"""
 
 import random
+import pydoc
 
 # -----------------------------------
 # Helper code

@@ -1,4 +1,10 @@
+"""
+Author: Chang Li
+All code original.
+"""
+
 from string import *
+import pydoc
 
 def SubStringMatchExact(target, key):
 

@@ -1,4 +1,11 @@
 from string import *
+import pydoc
+
+"""
+Author: Chang Li
+Variables given: Global vars
+Functions given: subStringMatchOneSub
+"""
 
 
 target1 = 'atgacatgcacaagtatgcat'
@@ -71,7 +78,6 @@ def subStringMatchExactlyOneSub(target, key):
     for x in not_exact:  # don't want value in exact
         if x not in exact:
             subs_only += (x,)
-            #print("Difference found at", x)
     print("Returned tuple is", subs_only)
     return subs_only
 

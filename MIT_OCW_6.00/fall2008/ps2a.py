@@ -1,6 +1,11 @@
-'''Max unbuyable number of McNuggets'''
+"""Max unbuyable number of McNuggets
+Author: Chang Li
+All code original.
+"""
+
 
 import math
+import pydoc
 
 # Global variables http://stackoverflow.com/questions/855493/referenced-before-assignment-error-in-python
 
@@ -64,11 +69,11 @@ if __name__ == '__main__':
 	check_nuggets()
 
 
-'''Notes
+"""Notes
 [1]: Should I have the a b c division check inside check_bounds() or defined at the top? Global seems to give some advantages
 ^This question has been indirectly answered. Passing the variables might be more convenient than the walls of global keyword.
 Will need to check how variables passed in functions work in Python.
 [2]: in the case that a match is found before each variable's maximum range is reached, break will only leave one loop when all loops need to stop.
 Return is best solution for this.
 
-'''
+"""

@@ -1,5 +1,10 @@
 from string import *
+import pydoc
 
+"""
+Author: Chang Li
+All code original.
+"""
 
 def countSubStringMatch(target, key):
 
@@ -37,9 +42,9 @@ if __name__ == '__main__':
     countSubStringMatchRecursive(target, key)
 
 
-'''
+"""
 [1] In the case where the key string has repeats of itself, e.g. 'hihi' and target is 'hihihi',
 adding len(key) will skip the second repetition. 'hihi' appears in 'hihihi' 2 times, not 1: [:5] and [5:]
 UPDATE: Using Python's built in count function for 'hihihi'.count('hihi') returns 1. So the correct implementation is to not accept overlaps.
 
-'''
+"""

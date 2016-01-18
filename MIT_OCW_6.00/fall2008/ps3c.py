@@ -1,4 +1,5 @@
 from string import *
+import pydoc
 
 # this is a code file that you can use as a template for submitting your
 # solutions
@@ -7,6 +8,12 @@ from string import *
 # these are some example strings for use in testing your code
 
 #  target strings
+
+"""
+Author: Chang Li
+Variables given: global vars
+Functions given: subStringMatchOneSub
+"""
 
 target1 = 'atgacatgcacaagtatgcat'
 target2 = 'atgaatgcatggatgtaaatgcag'

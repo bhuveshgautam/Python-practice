@@ -3,9 +3,16 @@
 # The 6.00 Word Game
 #
 
+"""
+Author: Chang Li
+Variables given: Global vars
+All functions were given.
+"""
+
 import random
 import string
 import time
+import pydoc
 
 VOWELS = 'aeiou'
 CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
@@ -221,8 +228,9 @@ def play_hand(hand, word_list):
                 points = get_word_score(userWord, initial_handlen)
                 total += points
                 #print '%s earned %d points. Total: %d points' % (userWord, points, total)
-                spent_time = (end_time - start_time) * 1000
-                print("It took {0:.2f} seconds to provide an answer.".format(spent_time))
+                print(end_time, start_time)
+                spent_time = end_time - start_time
+                print("It took %0.2f seconds to provide an answer." % spent_time)
                 print("{} earned {} points. Total: {} points.".format(userWord, points, total))
                 hand = update_hand(hand, userWord)
     print('Total score: %d points.' % total)
