@@ -212,6 +212,8 @@ def play_hand(hand, word_list):
     """    
     total = 0
     initial_handlen = sum(hand.values())
+    time_limit = int(input("Enter time limit, in seconds, for players: "))
+    time_left = time_limit
     while sum(hand.values()) > 0:
         print('\nCurrent Hand:',)
         display_hand(hand)
@@ -222,20 +224,27 @@ def play_hand(hand, word_list):
              break
         else:
             isValid = is_valid_word(userWord, hand, word_list)
-            if not isValid:
-                print('Invalid word, please try again.')
-            else:
-                points = get_word_score(userWord, initial_handlen)
-                spent_time = end_time - start_time
-                if round(end_time - start_time, 10) == round(0.0, 10):
-                    print("Answer entered to fast to time! You earn 30 extra points.")
-                    timed_points = points + 30
+            spent_time = end_time - start_time
+            time_left -= spent_time
+            if time_left >= 0:
+                if not isValid:
+                    print('Invalid word, please try again.')
+                    print("It took {:.2f} seconds to provide an answer.".format(spent_time))
+                    print("You have {:.2f} seconds remaining.".format(time_left))
                 else:
-                    timed_points = points / spent_time
-                total += timed_points
-                print("It took {:.2f} seconds to provide an answer.".format(spent_time))
-                print("{} earned {:.2f} points. Total: {:.2f} points.".format(userWord, timed_points, total))
-                hand = update_hand(hand, userWord)
+                    points = get_word_score(userWord, initial_handlen)
+                    if round(end_time - start_time, 10) == round(0.0, 10):
+                        print("Answer entered to fast to time! You earn 30 extra points.")
+                        timed_points = points + 30
+                    else:
+                        timed_points = points / spent_time
+                    total += timed_points
+                    print("It took {:.2f} seconds to provide an answer.".format(spent_time))
+                    print("You have {:.2f} seconds remaining.".format(time_left))
+                    print("{} earned {:.2f} points. Total: {:.2f} points.".format(userWord, timed_points, total))
+                    hand = update_hand(hand, userWord)
+            else:
+                print("Total time exceeds {} seconds. Your total is {:.2f} points.".format(time_limit, total))
     print('Total score: %.2f points.' % total)
 
 
