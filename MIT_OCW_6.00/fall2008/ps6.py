@@ -227,7 +227,11 @@ def play_hand(hand, word_list):
                 end_time = time.time()
                 points = get_word_score(userWord, initial_handlen)
                 spent_time = end_time - start_time
-                timed_points = points / spent_time
+                if round(end_time - start_time, 10) == round(0.0, 10):
+                    print("Answer entered to fast to time! You earn 30 extra points.")
+                    timed_points = points + 30
+                else:
+                    timed_points = points / spent_time
                 total += timed_points
                 print("It took {:.2f} seconds to provide an answer.".format(spent_time))
                 print("{} earned {:.2f} points. Total: {:.2f} points.".format(userWord, timed_points, total))
