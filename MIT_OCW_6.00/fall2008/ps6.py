@@ -213,10 +213,10 @@ def play_hand(hand, word_list):
     total = 0
     initial_handlen = sum(hand.values())
     while sum(hand.values()) > 0:
-        print('Current Hand:',)
+        print('\nCurrent Hand:',)
         display_hand(hand)
-        userWord = input('Enter word, or a . to indicate that you are finished: ')
         start_time = time.time()
+        userWord = input('Enter word, or a . to indicate that you are finished: ')
         if userWord == '.':
              break
         else:
@@ -226,14 +226,13 @@ def play_hand(hand, word_list):
             else:
                 end_time = time.time()
                 points = get_word_score(userWord, initial_handlen)
-                total += points
-                #print '%s earned %d points. Total: %d points' % (userWord, points, total)
-                print(end_time, start_time)
                 spent_time = end_time - start_time
-                print("It took %0.2f seconds to provide an answer." % spent_time)
-                print("{} earned {} points. Total: {} points.".format(userWord, points, total))
+                timed_points = points / spent_time
+                total += timed_points
+                print("It took {:.2f} seconds to provide an answer.".format(spent_time))
+                print("{} earned {:.2f} points. Total: {:.2f} points.".format(userWord, timed_points, total))
                 hand = update_hand(hand, userWord)
-    print('Total score: %d points.' % total)
+    print('Total score: %.2f points.' % total)
 
 
 #
