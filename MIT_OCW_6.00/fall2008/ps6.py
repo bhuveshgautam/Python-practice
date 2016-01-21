@@ -217,6 +217,7 @@ def play_hand(hand, word_list):
         display_hand(hand)
         start_time = time.time()
         userWord = input('Enter word, or a . to indicate that you are finished: ')
+        end_time = time.time()
         if userWord == '.':
              break
         else:
@@ -224,7 +225,6 @@ def play_hand(hand, word_list):
             if not isValid:
                 print('Invalid word, please try again.')
             else:
-                end_time = time.time()
                 points = get_word_score(userWord, initial_handlen)
                 spent_time = end_time - start_time
                 if round(end_time - start_time, 10) == round(0.0, 10):
