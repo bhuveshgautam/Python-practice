@@ -6,7 +6,7 @@
 """
 Author: Chang Li
 Variables given: Global vars
-All functions were given.
+Functions written: get_words_to_points. pick_best_word
 """
 
 import random
@@ -75,6 +75,16 @@ def get_words_to_points(word_list):
     for word in word_list:
         points_dict[word] = get_word_score(word, HAND_SIZE)
 
+
+def pick_best_word(hand, points_dict):
+
+    # get freq dist of hand
+    # for every key in points_dict:
+        # get freq dist of key
+        # check if every key letter is in hand, key freq <= hand freq
+            # if word can be made, compare saved points value from points dict
+                # if greater, save
+    # return word
 
 
 

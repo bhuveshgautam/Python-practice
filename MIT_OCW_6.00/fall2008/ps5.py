@@ -184,15 +184,13 @@ def is_valid_word(word, hand, word_list):
     """
     # TO DO ...
 
-    # more important to make sure word is real before checking if word is selectable from hand
-    if word in word_list:
-        for letter in word:
-            if word.count(letter) > hand.get(letter, 0):  # if more letters are used than available in hand, automatically invalid
-                return False
+    # from looking at the provided code given in ps6, wow. I completely forgot Python had the x in y construct. That performance comparison.
+    for letter in word:
+        if word.count(letter) > hand.get(letter, 0):  # if more letters are used than available in hand, automatically invalid
+            return False
+    # reaches here if word uses only letters in hand, need to make sure is valid
+    return word in word_list
 
-        return True  # will arrive here only if word is valid
-    else:
-        return False
 
 #
 # Problem #4: Playing a hand
