@@ -22,6 +22,8 @@ SCRABBLE_LETTER_VALUES = {
     'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 4, 'w': 4, 'x': 8, 'y': 4, 'z': 10
 }
 
+points_dict = {}
+
 # -----------------------------------
 # Helper code
 # (you don't need to understand this helper code)
@@ -67,6 +69,15 @@ def get_frequency_dict(sequence):
 #
 # Problem #1: Scoring a word
 #
+
+def get_words_to_points(word_list):
+
+    for word in word_list:
+        points_dict[word] = get_word_score(word, HAND_SIZE)
+
+
+
+
 def get_word_score(word, n):
     """
     Returns the score for a word. Assumes the word is a
@@ -165,7 +176,7 @@ def update_hand(hand, word):
 #
 # Problem #3: Test word validity
 #
-def is_valid_word(word, hand, word_list):
+def is_valid_word(word, hand, points_dict):
     """
     Returns True if word is in the word_list and is entirely
     composed of letters in the hand. Otherwise, returns False.
@@ -179,12 +190,12 @@ def is_valid_word(word, hand, word_list):
     for letter in word:
         if freq[letter] > hand.get(letter, 0):
             return False
-    return word in word_list
+    return word in points_dict
 
 #
 # Problem #4: Playing a hand
 #
-def play_hand(hand, word_list):
+def play_hand(hand, points_dict):
     """
     Allows the user to play the given hand, as follows:
 
@@ -223,7 +234,7 @@ def play_hand(hand, word_list):
         if userWord == '.':
              break
         else:
-            isValid = is_valid_word(userWord, hand, word_list)
+            isValid = is_valid_word(userWord, hand, points_dict)
             spent_time = end_time - start_time
             time_left -= spent_time
             if time_left >= 0:
@@ -232,7 +243,7 @@ def play_hand(hand, word_list):
                     print("It took {:.2f} seconds to provide an answer.".format(spent_time))
                     print("You have {:.2f} seconds remaining.".format(time_left))
                 else:
-                    points = get_word_score(userWord, initial_handlen)
+                    points = points_dict[userWord]
                     if round(end_time - start_time, 10) == round(0.0, 10):
                         print("Answer entered to fast to time! You earn 30 extra points.")
                         timed_points = points + 30
@@ -252,7 +263,7 @@ def play_hand(hand, word_list):
 # Problem #5: Playing a game
 # Make sure you understand how this code works!
 # 
-def play_game(word_list):
+def play_game(points_dict):
     """
     Allow the user to play an arbitrary number of hands.
 
@@ -273,10 +284,10 @@ def play_game(word_list):
         cmd = input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
         if cmd == 'n':
             hand = deal_hand(HAND_SIZE)
-            play_hand(hand.copy(), word_list)
+            play_hand(hand.copy(), points_dict)
             print
         elif cmd == 'r':
-            play_hand(hand.copy(), word_list)
+            play_hand(hand.copy(), points_dict)
             print
         elif cmd == 'e':
             break
@@ -288,4 +299,5 @@ def play_game(word_list):
 #
 if __name__ == '__main__':
     word_list = load_words()
-    play_game(word_list)
+    get_words_to_points(word_list)  # points_dict is global, no need to assign it again
+    play_game(points_dict)
