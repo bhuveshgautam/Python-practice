@@ -75,16 +75,25 @@ def get_words_to_points(word_list):
     for word in word_list:
         points_dict[word] = get_word_score(word, HAND_SIZE)
 
+    print("{} words converted to points.".format(len(points_dict)))
+
 
 def pick_best_word(hand, points_dict):
 
-    # get freq dist of hand
-    # for every key in points_dict:
-        # get freq dist of key
-        # check if every key letter is in hand, key freq <= hand freq
-            # if word can be made, compare saved points value from points dict
-                # if greater, save
-    # return word
+    # hand is already a dist, no need to call freq dist again
+    best_score = 0
+    best_word = "."
+
+    for word in points_dict.keys():
+        word_dist = get_frequency_dict(word)
+        for word_letter in word_dist.keys():  # all the characters in word MUST be in hand
+            if word_dist[word_letter] > hand.get(word_letter, 0):
+                break  # the moment match is impossible, start at the next word
+        else:  # else executes if for is NOT terminated by break. Here, if match is made
+            if points_dict[word] > best_score:
+                best_score = points_dict[word]
+                best_word = word
+    return best_word
 
 
 
