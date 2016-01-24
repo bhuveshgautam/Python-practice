@@ -16,3 +16,11 @@ if __name__ == '__main__':
     hand = get_frequency_dict("acmz")
     word = pick_best_word(hand, points_dict)
     print(word, points_dict[word])
+
+
+    # testing time limits
+    k_1 = get_time_limit(points_dict, 1)
+    k_2 = get_time_limit(points_dict, 2)
+    k_3 = get_time_limit(points_dict, 3)
+    k_4 = get_time_limit(points_dict, 4)
+    print(k_1, k_2, k_3, k_4)

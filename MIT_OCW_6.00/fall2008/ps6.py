@@ -24,6 +24,8 @@ SCRABBLE_LETTER_VALUES = {
 
 points_dict = {}
 
+time_limit = 0
+
 # -----------------------------------
 # Helper code
 # (you don't need to understand this helper code)
@@ -84,9 +86,9 @@ def pick_best_word(hand, points_dict):
     best_score = 0
     best_word = "."
 
-    for word in points_dict.keys():
+    for word in points_dict:
         word_dist = get_frequency_dict(word)
-        for word_letter in word_dist.keys():  # all the characters in word MUST be in hand
+        for word_letter in word_dist:  # all the characters in word MUST be in hand
             if word_dist[word_letter] > hand.get(word_letter, 0):
                 break  # the moment match is impossible, start at the next word
         else:  # else executes if for is NOT terminated by break. Here, if match is made
@@ -95,6 +97,18 @@ def pick_best_word(hand, points_dict):
                 best_word = word
     return best_word
 
+def get_time_limit(points_dict, k):
+    start_time = time.time()
+
+    for letter in string.ascii_lowercase:
+        letter in points_dict
+
+    for word in points_dict:
+        get_frequency_dict(word)
+        get_word_score(word, HAND_SIZE)
+
+    end_time = time.time()
+    return (end_time - start_time) * k
 
 
 def get_word_score(word, n):
@@ -319,4 +333,5 @@ def play_game(points_dict):
 if __name__ == '__main__':
     word_list = load_words()
     get_words_to_points(word_list)  # points_dict is global, no need to assign it again
+    time_limit = get_time_limit(points_dict, 1)
     play_game(points_dict)
